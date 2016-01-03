@@ -33,9 +33,9 @@
   <ItemGroup>
     <Compile Include="Card.cs" />
     <Compile Include="ExactEvaluator.cs" />
-    <Compile Include="FlyweightFactory.cs" />
     <Compile Include="HandScore.cs" />
     <Compile Include="IEvaluator.cs" />
+    <Compile Include="ObjectPool.cs" />
     <Compile Include="Pocket.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Stats.cs" />

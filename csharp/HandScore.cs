@@ -28,26 +28,26 @@ namespace Yuizumi.TexasHoldem
 
         private static int[][][][][] BuildTable()
         {
-            var layer5 = new FlyweightFactory<int, int>(ComputeScore);
-            var layer4 = new FlyweightFactory<int, int[]>(key => {
+            var layer5 = new ObjectPool<int, int>(ComputeScore);
+            var layer4 = new ObjectPool<int, int[]>(key => {
                 var array = new int[Card.Deck.Count];
                 for (int i = 0; i < Card.Deck.Count; i++)
                     array[i] = layer5.Get(MergeKey(key, Card.Deck[i]));
                 return array;
             });
-            var layer3 = new FlyweightFactory<int, int[][]>(key => {
+            var layer3 = new ObjectPool<int, int[][]>(key => {
                 var array = new int[Card.Deck.Count][];
                 for (int i = 0; i < Card.Deck.Count; i++)
                     array[i] = layer4.Get(MergeKey(key, Card.Deck[i]));
                 return array;
             });
-            var layer2 = new FlyweightFactory<int, int[][][]>(key => {
+            var layer2 = new ObjectPool<int, int[][][]>(key => {
                 var array = new int[Card.Deck.Count][][];
                 for (int i = 0; i < Card.Deck.Count; i++)
                     array[i] = layer3.Get(MergeKey(key, Card.Deck[i]));
                 return array;
             });
-            var layer1 = new FlyweightFactory<int, int[][][][]>(key => {
+            var layer1 = new ObjectPool<int, int[][][][]>(key => {
                 var array = new int[Card.Deck.Count][][][];
                 for (int i = 0; i < Card.Deck.Count; i++)
                     array[i] = layer2.Get(MergeKey(key, Card.Deck[i]));
